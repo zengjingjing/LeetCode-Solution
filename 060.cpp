@@ -1,69 +1,90 @@
+/****************************************************************************************************
+Solution:
+******************************************************************************************************/
+
 #include <iostream>
 #include <string>
 #include <vector>
+#include <cmath>
 using namespace std;
 
-int PermutationNum(int n )
+long long GetCount(bool* visited, int count, int n)
 {
-	int mul = 1;
-	while(n)
-		{
-			mul *= n;
-			n--;
-	}
-	return mul;
-}
-int GetCount(int count, int*arr ,int n)
-{
-	int i;
-	for(i = 1; i <= n; i++)
+	int index = 0;
+	for(int i = 0; i < n; i++)
 	{
-		if(arr[i] == 1)continue;
-		count--;
-		if(count == 0)
+		if(visited[i] == false)
+			index++;
+		if(index == count)
 		{
-			arr[i] = 1;	
-			break;
+			visited[i] = true;
+			return i + 1;
 		}
 	}
-	return i;
 }
-class Solution 
+
+void GetLast(string& ans, bool * visited, int n)
+{
+	for(int i = n - 1; i >= 0; i--)
+	{
+		if(visited[i] == false)
+		{
+			ans += to_string((long long)i + 1);
+			visited[i] = true;
+		}
+	}
+}
+
+class Solution
 {
 public:
-    string getPermutation(int n, int k)
+	string getPermutation(int n, int k)
 	{
-		string result;
+		string ans = "";	
+		if(k <= 0)return ans;
+		if(n == 0)return ans;
+		if(n == 1)return "1";
+		int *permutationToal = new int[n];
+		int a = 2;
+		permutationToal[n - 1] = 1;
+		permutationToal[n - 2] = 1;
+		for(int i = n - 3; i >= 0; i--)
+		{
+			permutationToal[i] = a * permutationToal[i + 1];
+			a++;
+		}
 
-		result.resize(n);
-		int arr[10];
-		for(int i = 0; i < 10; i++)
-			arr[i] = 0;
+		bool * visited = new bool[n];
+		for(int i = 0; i < n; i++)
+			visited[i] = false;
+
 		for(int i = 0; i < n; i++)
 		{
-			int mul = PermutationNum(n - 1 - i);
-			int count = k / mul;
-
-			result[i] = GetCount(count + 1, arr, n) + '0';
-			k -= count * mul; 
+			
+			if(k == 0)
+			{
+				GetLast(ans, visited, n);
+				break;
+			}
+			int count = ceil((double)k / permutationToal[i]);		
+			ans += std::to_string(GetCount(visited, count, n));
+			k -= (k / permutationToal[i]) * permutationToal[i];
 		}
-		return result;       
-    }
+		delete permutationToal;
+		delete visited;
+		return ans;
+	}
 };
 
-
-
-
+void test()
+{
+	Solution s;
+	cout << s.getPermutation(4, 6) << endl;
+}
 int main()
 {
-/*	Solution s;
-	cout << s.getPermutation(3, 5) <<endl;
+	test();
 	system("pause");
-	return 1;*/
-	vector<int> my;
-	my.push_back(1);
-	my.push_back(2);
-	vector<int> a(my.rbegin(), my.rend());
-	cout << a[0] <<" "<< a[1] <<endl;
-	system("pause");
+	return 1;
 }
+
