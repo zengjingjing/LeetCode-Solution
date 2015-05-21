@@ -36,3 +36,9 @@ my first solution of LeetCode
 Example: 
 049：Anagrams  
 
+
+
+
+不会做的题：
+076：Minimum Window Substring 
+这道题完全不知道从何下手。听说暴力搜索O(n2),可是我怎么发现不了呢？
