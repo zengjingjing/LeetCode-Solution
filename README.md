@@ -37,7 +37,11 @@ Example:
 049：Anagrams  
 
 
-
+题型四；链表
+用一个tail指针的思想就可以把问题变得很简单，不用考虑很多case.
+比如merge list.
+024:Swap Nodes in Pairs 
+025:Reverse Nodes in k-Group 
 
 不会做的题：
 076：Minimum Window Substring 

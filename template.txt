@@ -22,6 +22,17 @@ test();
 
 
 /******************链表相关**************************/
+链表定义：
+struct ListNode 
+{
+     int val;
+     ListNode *next;
+     ListNode(int x) : val(x), next(NULL) {}
+ };
+
+
+
+
 1.创建链表
 ListNode * BuildList(vector<int>& nums)
 {
