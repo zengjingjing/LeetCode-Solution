@@ -76,5 +76,45 @@ void Output(ListNode* head)
 /******************tree相关**************************/
 
 1.创建tree
+#define END 123
+TreeNode * CreateTree(const vector<int>& node_list)
+{
+	int size = node_list.size();
+	if(size == 0)return NULL;
+	TreeNode * root = new TreeNode(node_list[0]);
+	queue<TreeNode*> myQueue;
+	myQueue.push(root);
+	int i = 0;
+	while(i < size)
+	{
+		TreeNode * top = myQueue.front();
+		if(i + 1 < size)
+			i++;
+		else break;
+		if( node_list[i] != END)
+		{
+			top->left = new TreeNode(node_list[i]);
+			myQueue.push(top->left);
+		}
+		if( i + 1 < size)
+			i++;
+		else break;
+		if( node_list[i] != END)
+		{
+			top->right = new TreeNode(node_list[i]);
+			myQueue.push(top->right);
+		}
+		myQueue.pop();
+	}
+	return root;
+}
 
+2.输出Tree
+void PreOrderTraverse(TreeNode * root)
+{
+	if(!root)return ;
+	cout << root->val << " ";
+	PreOrderTraverse(root->left);
+	PreOrderTraverse(root->right);
+}
 
