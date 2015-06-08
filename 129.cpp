@@ -7,10 +7,10 @@ using namespace std;
 
 typedef struct TreeNode
 {
-      int val;
-      TreeNode *left;
-      TreeNode *right;
-      TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+	int val;
+	TreeNode *left;
+	TreeNode *right;
+	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
 }TreeNode;
 
 TreeNode * CreateTree(const vector<int>& node_list)
@@ -46,51 +46,48 @@ TreeNode * CreateTree(const vector<int>& node_list)
 }
 
 
-
-
-
-bool IsLeaf(TreeNode * node)
-{
-	return !node->left && !node->right;
-}
-int result = 0;
-void Travsrse(TreeNode* root, string str)
-{
-	if(IsLeaf(root))
-	{
-		string temp1 = to_string(root->val);
-		str += temp1;
-		int a = atoi(str.c_str());
-		result += a;
-	}
-	string str1 = str;
-	string str2 = str;
-	string temp = to_string(root->val);
-	str1 += temp;
-	str2 += temp;
-	if(root->left)
-		Travsrse(root->left, str1);
-	if(root->right)
-		Travsrse(root->right, str2);
-
-}
 class Solution 
 {
 public:
-    int sumNumbers(TreeNode *root)
-    {
+	int sumNumbers(TreeNode *root)
+	{
 		if(!root)return 0;
-		string str = "";
-		Travsrse(root, str);
-		return result;
+		string sub_result = "";
+		int ans = 0;
+		Traverse(root, sub_result, ans);
+		return ans;
 	}
+	void Traverse(TreeNode* root, string sub_result, int& ans)
+	{
+		char ch[2];
+		sprintf(ch, "%d", root->val);
+		sub_result += ch;
+		if(IsLeaf(root))
+		{
+			ans += atoi(sub_result.c_str());
+			return ;
+		}
+		if(root->left)
+			Traverse(root->left, sub_result, ans);
+		if(root->right)
+			Traverse(root->right, sub_result, ans);
+		return ;
+
+	}
+
+	bool IsLeaf(TreeNode* node)
+	{
+		return !node->left && !node->right;
+	}
+
 };
 
 void test()
 {
 	vector<int> arr;
-	arr.push_back(0);
 	arr.push_back(1);
+	arr.push_back(2);
+	arr.push_back(3);
 	TreeNode * root = CreateTree(arr);
 	Solution s;
 	cout << s.sumNumbers(root) << endl;
@@ -99,7 +96,7 @@ void test()
 
 int main()
 {
-test();
+	test();
 	system("pause");
 	return 1;
 }

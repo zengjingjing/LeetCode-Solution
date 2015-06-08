@@ -2,7 +2,7 @@
 my first solution of LeetCode
 2015-5-7  Problem 95,98(80 already!)
 
-
+我经常在递归的结束地方忘记return!!!
 
 题型一：经典暴力递归：（里面涉及到重复不重复的时候，需要注意该如何处理！）
 模板都是一样的
@@ -14,6 +14,7 @@ my first solution of LeetCode
 052：N-Queens II
 071: Letter Combinations of a Phone Number 
 093：Restore IP Addresses
+树的遍历问题也可以用这种思想来解释。只不过是特殊的递归而已。（只有两路，不用循环）
 
 题型二：动态规划
 053：最大字串之和
