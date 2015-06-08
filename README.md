@@ -17,6 +17,9 @@ my first solution of LeetCode
 
 题型二：动态规划
 053：最大字串之和
+121：同上
+123：同上
+题解：http://blog.csdn.net/linhuanmars/article/details/23162793， 局部最优和全局最优的思想，非常nice.
 055：method1 O(n * n),设置访问数组，保存每个元素是否可达端点。这样对每个元素，都需要遍历它后面的元素。并且空间复杂度：O(n)
      method2 O(n),O(1) 保存当前能访问的最大长度。
 	 如果当前元素能达到的长度比curMax长，那么更新；如果不能，则什么也不干；如果当前元素的index == curMax,也就是说已经达到了巅峰，并且arr[index] = 0,那么代表无可救药，返回false.

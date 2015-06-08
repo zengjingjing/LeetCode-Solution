@@ -1,42 +1,47 @@
+/****************************************************************************************************
+Solution:
+This is a classical DP problem. I need to summerzie this kind of problem.  The brutal algorithm of this kind of problem is O(N * N).
+We can use DP to decrease the time complexity. 
+******************************************************************************************************/
+
 #include <iostream>
 #include <string>
 #include <vector>
 
 using namespace std;
+
 class Solution
 {
 public:
-    int maxProfit(vector<int>& prices)
+	int maxProfit(vector<int>& prices)
 	{
 		int size = prices.size();
 		if(size == 0)return 0;
-		int min = prices[0];
-		int max = prices[0];
-		int minIndex = 0;
-		int maxIndex = 0;
+		int maxP = 0;
+		int minStart = prices[0];
 		for(int i = 1; i < size; i++)
 		{
-			if(prices[i] > max)
-				{
-					max = prices[i];
-					maxIndex = i;
+			if(prices[i] > minStart)
+			{
+					maxP = (prices[i] - minStart) > maxP ?  (prices[i] - minStart) : maxP;			
 			}
-			else if(prices[i] < min)
-				{
-					min = prices[i];
-					minIndex = i;
-			}
+			else
+				minStart = prices[i];
 		}
-		if(minIndex <= maxIndex)
-			return (max - min);
-		return 0;
-    }
+		return maxP;
+	}
 };
 
 void test()
 {
-	string s;
-	
+	Solution s;
+	vector<int> prices;
+	prices.push_back(2);
+	prices.push_back(4);
+	prices.push_back(1);
+	prices.push_back(5);
+	prices.push_back(6);
+	cout << s.maxProfit(prices) << endl;
 }
 int main()
 {
@@ -44,5 +49,3 @@ int main()
 	system("pause");
 	return 1;
 }
-
-
