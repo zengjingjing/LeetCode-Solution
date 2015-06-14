@@ -20,6 +20,7 @@ my first solution of LeetCode
 053：最大字串之和
 121：同上
 123：同上
+139，140：一维DP，有些小问题要注意的，都在代码里面写了
 题解：http://blog.csdn.net/linhuanmars/article/details/23162793， 局部最优和全局最优的思想，非常nice.
 055：method1 O(n * n),设置访问数组，保存每个元素是否可达端点。这样对每个元素，都需要遍历它后面的元素。并且空间复杂度：O(n)
      method2 O(n),O(1) 保存当前能访问的最大长度。

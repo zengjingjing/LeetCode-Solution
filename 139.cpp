@@ -1,42 +1,64 @@
+/****************************************************************************************************
+Solution:
+******************************************************************************************************/
+
 #include <iostream>
 #include <string>
 #include <vector>
+#include <set>
 #include <unordered_set>
+
 using namespace std;
 
-
-class Solution
-{
+class Solution {
 public:
-    bool wordBreak(string s, unordered_set<string>& wordDict)
+	bool wordBreak(string s, unordered_set<string>& wordDict) 
 	{
-        if(s.size() == 0)return true;
-		bool flag = false;
-		for(int i = 0; i < s.size(); i++)
+		int size = s.size();
+		if(size == 0)return false;
+		bool ans = false;
+		bool* arr = new bool[size + 1];
+		for(int i = 0; i < size; i++)
+			arr[i] = false;
+		arr[size] = true;
+		for(int i = size - 1; i >= 0; i--)
 		{
-			string sub_str = s.substr(0, i + 1);
-			if(wordDict.find(sub_str)!= wordDict.end())
-				flag = flag || wordBreak(s.substr(i + 1, s.size() - i - 1), wordDict);
+			bool temp_ans = false;
+			for(int j = i; j < size; j++)
+			{
+				string sub_str = s.substr(i, j - i + 1);
+				if(wordDict.find(sub_str) != wordDict.end())
+				{
+					temp_ans = temp_ans || arr[j + 1];
+					if(temp_ans == true)
+						break;
+				}
+			}
+			arr[i] = temp_ans;
 		}
-		return flag;
-    }
+		ans = arr[0];
+		delete arr;
+		return ans;
+	 }
 };
+
 void test()
 {
 	Solution s;
-	unordered_set<string> wordDict ;
-	wordDict.insert("leet");
-	wordDict.insert("code1");
-	if(s.wordBreak("leetcode", wordDict))
+	string str = "leetcode";
+	unordered_set<string> word_dict;
+	word_dict.insert("lee1t");
+	word_dict.insert("code");
+	if(s.wordBreak(str, word_dict))
 		cout << "true" << endl;
 	else
 		cout << "false" << endl;
 }
+
+
 int main()
 {
-test();
+	test();
 	system("pause");
 	return 1;
 }
-
-
