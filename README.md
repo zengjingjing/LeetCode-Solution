@@ -37,8 +37,11 @@ my first solution of LeetCode
 064：Minimum Path Sum（如果行走方向可以是四面八方，而不是只能两个方向，那怎么办？感觉这种方法不能generalize...）
 072: Edit Distance 
 
-题型三：数组(sorting, sorting思想的变形)
-041：Solution is in the source code.
+题型三：数组(sorting, sorting思想的变形) 
+041：Solution is in the source code.、
+Two pointer, 滑动窗口：
+209：Minimum Size Subarray Sum
+001:two sum
 
 解体心得：
 很多时候，一个序列，如果对其排序，会好处理很多。
