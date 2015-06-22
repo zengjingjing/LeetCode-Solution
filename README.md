@@ -29,6 +29,8 @@ my first solution of LeetCode
 
 152：Maximum Product Subarray（Maximum  Subarray的变种，局部最优+全局最优 ）
 保存当前最小值和最大值就行。(Maximum  Subarray只用保存当前最大值，但乘法和加法不一样，当前一个很小值可能在之后乘以一个负数后变成一个很大的值) 
+
+198,213:House Robber II (简单的一维DP，注意II不是二维DP)
 二维动态规划：
 这种类型的题目只需注意构造中间结果的顺序即可，无他。
 中间结果的构造依赖于最优子结构，如果f(x) = optical(上，中，下),那么在处理f(x)的时候就要已经构造好上中下。
