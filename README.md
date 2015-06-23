@@ -72,6 +72,12 @@ Example:
 149：这道题要整理，具体原因在cpp中。
 
 
+位操作：
+136：Single Number
+137：Single Number II
+187：Repeated DNA Sequences
+201：Bitwise AND of Numbers Range
+
 
 
 Note:
@@ -81,3 +87,15 @@ Note:
 2：在for循环中容易犯的一个错误（207：Course Schedule ）
 for(int i = 0; i < numCourses && visited[i] == false; i++)
 我一直以为这是在循环中对于visited[i] == true的case跳过，直接i++，继续后面的循环。但其实只要出现visited[i] == true，这个for循环就会终止。
+
+
+
+3：这里要注意一个写代码时候的问题：
+while(start <= end && nums[start] <= temp)
+	start++;
+第一个判断是防止循环导致越界，第二个是要找出符合条件的点。
+这里跳出循环后可能出现两种情况： start>end(start=end+1)  或者nums[start] > temp。也就是说我不一定能够找到后者，有可能在前面一个判断上就已经
+不满足而跳出循环了，而我经常在跳出循环后以为找到了这样的点，而直接进行后续的操作。这是不对的。需要先判断一下到底是找到了没有。通过if(start>end)就可以判断出来了。
+
+
+这是思维的一个误区，需要注意的。
