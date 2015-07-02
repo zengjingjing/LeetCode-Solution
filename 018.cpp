@@ -13,11 +13,11 @@ Solution:
 #include <functional>
 using namespace std;
 
-vector<vector<int>> twoSum(vector<int> &numbers, int target, int left, int right, int val) 
+vector<vector<int>> twoSum(vector<int> &numbers, int target, int left, int right, const int& val1, const int& val2) 
 {
 	int i = left;
 	int j = right;
-	vector<vector<int>> result;
+	vector<vector<int>> ans;
 
 	while(i < j)
 	{
@@ -34,10 +34,11 @@ vector<vector<int>> twoSum(vector<int> &numbers, int target, int left, int right
 		if(numbers[i] + numbers[j] == target)
 		{
 			vector<int> temp_result;
-			temp_result.push_back(val);
+			temp_result.push_back(val1);
+			temp_result.push_back(val2);
 			temp_result.push_back(numbers[i]);
 			temp_result.push_back(numbers[j]);				
-			result.push_back(temp_result);
+			ans.push_back(temp_result);
 			i++;
 			j--;
 		}
@@ -45,53 +46,43 @@ vector<vector<int>> twoSum(vector<int> &numbers, int target, int left, int right
 			j--;
 		else if(numbers[i] + numbers[j] < target)
 			i++;
-		
+
 	}
-	return result;
+	return ans;
 }
 
 class Solution 
 {
 public:
-	vector<vector<int> > threeSum(vector<int> &num)
+	vector<vector<int>> fourSum(vector<int>& nums, int target)
 	{
-		vector<vector<int>> result;
-		if(num.size() < 3)return result;
-		sort(num.begin(), num.end(), less<int>()); 
-	/*	vector<int> tempNum;
-		tempNum.push_back(num[0]);
-		for(int i = 1; i < num.size(); i++)
-		{
-			if(num[i] != num[i - 1])
-				tempNum.push_back(num[i]);
-		}
-		num = tempNum;*/
+		vector<vector<int>> ans;
+		if(nums.size() < 4)return ans;
+		sort(nums.begin(), nums.end(), less<int>()); 
 		int i;
-		int size = num.size();
-		int zero_index;
-		for(i = 0; i < size - 1; i++)
+		int size = nums.size();
+		for(i = 0; i < size - 3; i++)
 		{
-			if(num[i] <= 0 && num[i + 1] > 0)break;
-		}
-		zero_index = i + 1;
-		for(i = 0; i < zero_index; i++)
-		{
-			if(i > 0 && num[i] == num[i-1])continue;
-			int sum2 = -num[i];
-			// add result is negative, find right through zero_index
-			vector<vector<int>> sub_result = twoSum(num, sum2, i + 1, size - 1, num[i]);
-			if(sub_result.size() > 0)
+			if(i > 0 && nums[i] == nums[i - 1])
+				continue;
+			for(int j = i + 1; j < size - 2; j++)
 			{
-				int j;
-				int sub_size = sub_result.size();
-				for(j = 0; j < sub_size; j++)
+				if(j > i + 1 && nums[j] == nums[j - 1])continue;
+				int sum = target - nums[i] - nums[j];
+				vector<vector<int>> sub_result = twoSum(nums, sum, j + 1, size - 1, nums[i], nums[j]);
+				if(sub_result.size() > 0)
 				{
-					result.push_back(sub_result[j]);
+					int sub_size = sub_result.size();
+					for(int k = 0; k < sub_size; k++)
+					{
+						ans.push_back(sub_result[k]);
+					}
+
 				}
-				
 			}
+
 		}
-		return result;
+		return ans;
 	}
 
 };
@@ -113,7 +104,7 @@ int main()
 
 	}
 
-	vector<vector<int>> result = s.threeSum(test);
+	vector<vector<int>> result = s.fourSum(test, 1);
 	int i;
 	int size = result.size();
 	for(i = 0; i < size; i++)

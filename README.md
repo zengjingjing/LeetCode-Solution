@@ -37,13 +37,20 @@ my first solution of LeetCode
 像下面这几道题，都不需要刻意找构造方向，直接二层循环即可。因为都是依赖上，坐，如064；或者上、左、对角线。如072
 063：Unique Paths II
 064：Minimum Path Sum（如果行走方向可以是四面八方，而不是只能两个方向，那怎么办？感觉这种方法不能generalize...）
-072: Edit Distance 
+072: Edit Distance
+
+211: Maximal Square（我觉得这种迭代构造中间解的过程也可以理解为局部最优解+全局最优解）
+
 
 题型三：数组(sorting, sorting思想的变形) 
-041：Solution is in the source code.、
+041：Solution is in the source code.（计数排序）
 Two pointer, 滑动窗口：
 209：Minimum Size Subarray Sum
 001:two sum
+015：3sum
+016:3sumcloset
+018:4sum
+011：Container With Most Water 
 
 解体心得：
 很多时候，一个序列，如果对其排序，会好处理很多。
@@ -77,6 +84,8 @@ Example:
 137：Single Number II
 187：Repeated DNA Sequences
 201：Bitwise AND of Numbers Range
+Divide Two Integers
+Pow(x, n)
 
 
 
@@ -99,3 +108,12 @@ while(start <= end && nums[start] <= temp)
 
 
 这是思维的一个误区，需要注意的。
+
+
+4：set中元素只能用迭代器来访问，不能用下标来访问，跟vector还不太一样。
+比较：
+                set                    vector
+插入操作：      insert(自动排序)       push_back/insert
+元素访问：      迭代器                 迭代器/下标index
+
+

@@ -1,48 +1,59 @@
+/****************************************************************************************************
+Solution:
+******************************************************************************************************/
+
 #include <iostream>
+#include <string>
+#include <vector>
+
 using namespace std;
 
 
-typedef  struct ListNode 
-{
-      int val;
-      ListNode *next;
-      ListNode(int x) : val(x), next(NULL) {}
-}ListNode;
- 
+struct ListNode {
+     int val;
+     ListNode *next;
+     ListNode(int x) : val(x), next(NULL) {}
+ };
+
 class Solution 
 {
 public:
-    ListNode *rotateRight(ListNode *head, int k) 
+	ListNode *rotateRight(ListNode *head, int k) 
 	{
-        ListNode * p1,*p2;
-		p1 = p2 = head;
-		if(head == NULL)return NULL;
-		int count = 1;
-		while(p2 != NULL)
+		int count= 0;
+		ListNode* temp = head;
+		ListNode * tail = NULL;
+		if(!head)
+			return NULL;
+		while(temp)
 		{
-			p2 = p2->next;
 			count++;
-			if(count == k)break;
+			tail = temp;
+			temp = temp->next;
 		}
-		if(p2 == NULL)return head;
-		ListNode * p3 = p1;
-		while(p2 ->next != NULL)
+
+		k %= count;
+		if( k == 0)return head;
+		temp = head;
+		ListNode * prev = NULL;
+		for(int i = 0; i < count - k; i++)
 		{
-			p3 = p1;
-			p2 = p2->next;
-			p1 = p1->next;
+			prev = temp;
+			temp = temp->next;
 		}
-		p3->next =NULL;
-		p2->next = head;
-		head = p1;
-		return head;
-    }
+		tail->next = head;
+		prev->next = NULL;
+		head = temp;
+		return head;	
+	}
 };
 
-
-
+void test()
+{
+}
 int main()
 {
-
+	test();
+	system("pause");
+	return 1;
 }
-
