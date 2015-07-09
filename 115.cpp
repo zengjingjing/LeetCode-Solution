@@ -27,49 +27,50 @@ public:
 			memset(arr[i], -1, sizeof(int) * cols);
 		}
 
-		return GetNum(s, t, arr, 0, 0) ;
-	
+		ans = GetNum(s, t, arr, 0, 0) ;
+		for(int i = 0; i < rows; i++)
+			delete arr[i];
+		return ans;	
 	}
 
 	int GetNum(const string& s, const string& t, int** arr, int start1, int start2)
 	{
+		if((s.size() - start1) < (t.size() - start2))
+			return 0;
+		
 		if(start2 == t.size() && start1 <= s.size())
 		{
-			arr[start1 - 1][start2 - 1] = 1;
 			return 1;
 		}
 		else if(start1 == s.size())
 		{
 			arr[start1 - 1][start2 -1] = 0;
 			return 0;
-
 		}
-		int count = (s.size() - start1) - (t.size() - start2);
+		
+		if(arr[start1][start2] != -1)
+			return arr[start1][start2];
 		int ans = 0;
-		for(int i = start1; i < s.size() && i <= start1 + count; i++)
+		for(int i = start1; i < s.size(); i++)
 		{
 			if(s[i] == t[start2])
 			{
-				if(arr[i][start2] == -1)
-				{
-					ans += GetNum(s, t, arr, i + 1, start2 + 1);
-				}
-				else 
-					ans += arr[i][start2];
-
+				ans += GetNum(s, t, arr, i + 1, start2 + 1);
+				//ans += GetNum(s, t, arr, i, start2);
 			}
 		}
 		arr[start1][start2] = ans;
 		return arr[start1][start2];
-	}
-	
+	}	
 };
 
 void test()
 {
 	Solution s;
-	string source = "adbdadeecadeadeccaeaabdabdbcdabddddabcaaadbabaaedeeddeaeebcdeabcaaaeeaeeabcddcebddebeebedaecccbdcbcedbdaeaedcdebeecdaaedaacadbdccabddaddacdddc";
-	string dest = "bcddceeeebecbc";
+	string source = "aabb";
+	string dest = "ab";
+	//string source = "rrrrabbbi";
+	//string dest = "rabbit";
 
 	cout << s.numDistinct(source,dest) << endl;
 }

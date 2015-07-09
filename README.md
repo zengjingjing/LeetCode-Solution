@@ -16,10 +16,11 @@ my first solution of LeetCode
 093：Restore IP Addresses
 树的遍历问题也可以用这种思想来解释。只不过是特殊的递归而已。（只有两路，不用循环）
 
-题型二：动态规划
+题型二：动态规划（要整理搜索和DP的区别，都可以用一个状态转移公式F（n）表示）
 053：最大字串之和
 121：同上
 123：同上
+091:Decode Ways 简单的一维DP，用额外数组O(n)即可。
 139，140：一维DP，有些小问题要注意的，都在代码里面写了
 题解：http://blog.csdn.net/linhuanmars/article/details/23162793， 局部最优和全局最优的思想，非常nice.不直接针对最后的f(n)进行建模。惯性思维就是直接针对f(n)，看能不能找到最优子结构，然后
 055：method1 O(n * n),设置访问数组，保存每个元素是否可达端点。这样对每个元素，都需要遍历它后面的元素。并且空间复杂度：O(n)
@@ -38,6 +39,7 @@ my first solution of LeetCode
 063：Unique Paths II
 064：Minimum Path Sum（如果行走方向可以是四面八方，而不是只能两个方向，那怎么办？感觉这种方法不能generalize...）
 072: Edit Distance
+115:简单的二维DP
 
 211: Maximal Square（我觉得这种迭代构造中间解的过程也可以理解为局部最优解+全局最优解）
 
@@ -65,9 +67,10 @@ Example:
 025:Reverse Nodes in k-Group 
 
 不会做的题：
-076：Minimum Window Substring 
-这道题完全不知道从何下手。听说暴力搜索O(n2),可是我怎么发现不了呢？
-
+010(DP)：Regular Expression Matching
+044(DP):Wildcard Matching(跟上一题很像)
+085(DP):Maximal Rectangle
+087(DP):Scramble String
 
 135：这道题的思路很稀奇，左右分别扫描一遍，我记得我有道题也采用这种思路，很巧妙。但对这道题，我只能说，我想不上去，只能是看题解来做。其实就是一道数学题。
 往右扫描一遍的时候，可以确定每个孩子至少拥有多少candy（满足右边value比左边大的candy大）,然后再往左扫描，调整一下，（满足左边value比右边大的candy大），
@@ -87,7 +90,10 @@ Example:
 Divide Two Integers
 Pow(x, n)
 
-
+数学题：
+1.注意溢出的情况
+029：Divide Two Integers 
+069：Sqrt(x) 
 
 Note:
 1：有时候在我的机器上可以跑过的case，但在Leetcode上提交的时候会runtime error。

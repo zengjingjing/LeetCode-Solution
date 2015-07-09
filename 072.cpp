@@ -1,7 +1,7 @@
 /****************************************************************************************************
 Solution:
 Two demensional DP.
-the hard part of DP is that you cannot find the optical sub-structure. Actually, i don't konw how to find the sub problem of this question,
+the hard part of DP is that you cannot find the optical sub-structure. Actually, i don't know how to find the sub problem of this question,
 so i cannot find the solution.
 
 After you find the optical sub-structure, the next part is easy to do.

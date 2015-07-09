@@ -1,10 +1,16 @@
+/****************************************************************************************************
+Solution:
+老子真是日了狗了，这道题提交了估计有30次，越界的地方一定要注意。之前数组用int是不行的。
+-2147483648 1  （不越界）
+-2147483648 -1 （越界）
+
+******************************************************************************************************/
 #include <iostream>
 #include <stack>
 #include <climits>
+#include <cmath>
 using namespace std;
-int stackNum[33];
-int stackCount[33];
-stack<int >a;
+
 
 class Solution 
 {
@@ -12,57 +18,56 @@ public:
 	int divide(int dividend, int divisor)
 	{
 		if(divisor == 0 )return INT_MAX;
-		bool flag = false;
-		if((dividend < 0 && divisor > 0) || (dividend > 0 && divisor < 0))flag = true;
-		if(dividend < 0) dividend = -dividend;
-		if(divisor < 0) divisor = -divisor;
-		if(dividend == 0 )return 0;
+		int neg = 1;
+		if((double)dividend * divisor < 0)
+			neg = -1;
+		long long l_dividend = fabs(double(dividend));
+		long long l_divisor = fabs(double(divisor));
 
-		long long  sum = divisor;
-		int count = 1;
+		if(l_dividend == 0 )return 0;
+		long long stackNum[33];
+		long long stackCount[33];
+		long long  sum = l_divisor;
+		long long count = 1;
 		int i = 0;
-		a.
-		while(sum < dividend)
+		if(l_dividend < l_divisor)
+			return 0;
+		while(sum <= l_dividend)
 		{
-		//	stackNum.push(sum);
 			stackNum[i] = sum;
-		//	stackCount.push(count);
 			stackCount[i] = count;
-			
 			sum += sum;
 			count += count;
 			i++;
 		}
-		//int size = stackNum.size();
 		int size = i;
-		int finalCount = 0;
-		int finalSum = 0;
+		long long finalCount = 0;
+		long long finalSum = 0;
 		for(int i = size - 1; i >= 0; i--)
 		{
-
-			//int val = stackNum.top();
-			int val = stackNum[i];
-			if(finalSum + val <= dividend)
+			if(finalSum + stackNum[i] <= l_dividend)
 			{
-				//finalSum += stackNum.top();
-				//finalCount += stackCount.top();
-				finalSum += val;
+				finalSum += stackNum[i];
 				finalCount += stackCount[i];
 			}
 
-
-
-			//stackNum.pop();
-			//stackCount.pop();
 		}
-		return finalCount;
+		if(finalCount > 2147483647)
+		{
+			if(neg == 1)
+				return 2147483647;
+			else
+				return finalCount * neg;
+		}
+
+		return finalCount * neg;
 	}
 };
 
 int main()
 {
 	Solution s;
-	cout << s.divide(2147483647,1);
+	cout << s.divide(2147483647, 3);
 	system("pause");
 	return 1;
 }
