@@ -62,3 +62,10 @@ int main()
 	system("pause");
 	return 1;
 }
+
+
+while(1)
+fopen(1.txt)'
+
+
+
