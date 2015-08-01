@@ -20,8 +20,8 @@ public:
 			flag[i] = new int*[size1];
 			for(int j = 0; j < size1; j++)
 			{
-				flag[i][j] = new int[size1];
-				for(int k = 0; k < size1; k++)
+				flag[i][j] = new int[size1 + 1];
+				for(int k = 0; k <= size1; k++)
 				{
 					flag[i][j][k] = 0; // 0 = not visited, 1 = false, 2 = true;
 				}
@@ -72,7 +72,7 @@ void test()
 {
 	Solution s;
 	string s1 = "great";
-	string s2 = "rgtae";
+	string s2 = "greet";
 	if(s.isScramble(s1, s2))
 		cout << "true" << endl;
 	else
