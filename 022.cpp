@@ -1,82 +1,61 @@
+/****************************************************************************************************
+Solution:
+******************************************************************************************************/
+
 #include <iostream>
 #include <string>
 #include <vector>
 
 using namespace std;
 
-typedef struct STR
-{
-	string str;
-	int start;
-	STR(string s, int st){str = s; start = st;}
-	STR(){};
-};
-STR GenerateLast(int n)
-{
-	STR ret;
-	string ans = "(";
-	for(int i = 0; i < n - 1; i++)
-		ans += "()";
-	ans.push_back(')');
-	ret.str = ans;
-	ret.start = ans.size() - 2;
-	return ret;
-	
-}
-class Solution
+class Solution 
 {
 public:
-	vector<string> generateParenthesis(int n) 
+	vector<string> generateParenthesis(int n)
 	{
 		vector<string> ans;
-		vector<STR> temp_ans;
-		if(n == 0)return ans;
-		string str1 = "()";
-		string str2 = "()()";
-		string str3 = "(())";
-		if(n == 1)
-		{
-			ans.push_back(str1);
+		string sub_ans;
+		if(n <= 0)
 			return ans;
+		sub_ans.resize(2 * n);
+		GenerateAll(ans, sub_ans, 0, n, 0 , 0);
+		return ans;
+	}
+
+	void GenerateAll(vector<string>&ans, string& sub_ans, int start, int n, int leftNum, int rightNum)
+	{
+		if(start == 2 * n)
+		{
+			ans.push_back(sub_ans);
 		}
 
-		if(n >= 2)
+		if(leftNum < n)
 		{
-			temp_ans.push_back(STR(str2, 2));
-			temp_ans.push_back(STR(str3, 0));
+			sub_ans[start] = '(';
+			GenerateAll(ans, sub_ans, start + 1, n, leftNum + 1, rightNum);
 		}
-		for(int i = 3; i <= n; i++)
+		if(rightNum < leftNum)
 		{
-			int size = temp_ans.size();
-			for(int j = 0; j < size; j++)
-			{
-				STR s = temp_ans[j];
-				temp_ans[j].start = temp_ans[j].str.size();
-				temp_ans[j].str = temp_ans[j].str + "()";
-				s.str.insert(s.start,"(");
-				s.str.push_back(')');
-				//s.start = start;
-				temp_ans.push_back(s);
-			}
-			STR last = GenerateLast(i);
-			temp_ans.push_back(last);
+			sub_ans[start] = ')';
+			GenerateAll(ans, sub_ans, start + 1, n, leftNum, rightNum + 1);
 		}
-		for(int i = 0; i < temp_ans.size(); i++)
-			ans.push_back(temp_ans[i].str);
-		return ans;
 	}
 };
 
 void test()
 {
 	Solution s;
-	vector<string> ans = s.generateParenthesis(4);
+	int n = 1;
+	vector<string> ans = s.generateParenthesis(n);
 	for(int i = 0; i < ans.size(); i++)
 		cout << ans[i] << endl;
+
 }
+
 int main()
 {
 	test();
 	system("pause");
 	return 1;
 }
+
