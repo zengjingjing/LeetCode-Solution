@@ -16,33 +16,32 @@ typedef struct TreeLinkNode
    int val;
    TreeLinkNode *left, *right, *next;
    TreeLinkNode(int x) : val(x), left(NULL), right(NULL), next(NULL) {}
-};
+}TreeLinkNode;
  
 class Solution {
 public:
     void connect(TreeLinkNode *root)
 	{
-		if(!root)return;
-		int count = 1;
-		root->next = NULL;
-		while(root->left)
-		{
-			TreeLinkNode* start = root;
-			for(int i = 0; i < count && start != NULL; i++)
-			{
-				start->left->next = start->right;
-				if(start->next)
-				{
-					start->right->next = start->next->left;
-				}
-				else
-					start->right->next = NULL;
-				start = start->next;
-			}
-			count *= 2;
-			root = root->left;
-		}	
+		MakeConnection(root);
     }
+	
+	void MakeConnection(TreeLinkNode* root)
+	{
+		if(!root)
+			return ;
+		MakeConnection(root->left);
+		MakeConnection(root->right);
+		TreeLinkNode* tree1 = root->left;
+		TreeLinkNode* tree2 = root->right;
+		while(tree1 && tree2)
+		{
+			tree1->next = tree2;
+			tree1 = tree1->right;
+			tree2 = tree2->left;
+		}
+		return ;
+			
+	}
 };
 
 void test()
